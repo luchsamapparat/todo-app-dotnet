@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "todo_app": {
+    "SsrTodo": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
