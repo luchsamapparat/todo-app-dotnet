@@ -1,0 +1,19 @@
+﻿@page
+@model CompletedTasksModel
+@{
+    ViewData["Title"] = "Completed Tasks";
+}
+
+<!-- TODO: th:if="${completedTasks.empty}" -->
+<p class="empty-completed-tasks-list alert alert-success mb-5" role="alert">No tasks have been completed yet.</p>
+
+<!-- TODO: th:if="${!completedTasks.empty}" -->
+<ul class="completed-tasks-list mb-5">
+    <!-- TODO: th:each="task : ${completedTasks}" -->
+    <li>
+        <!-- TODO: th:text="${task.description}" -->
+        <span></span>
+        <!-- TODO: th:title="${DateUtils.formatShortDateTime(task.completedDate, locale)}" th:text="${DateUtils.formatRelativeDate(task.completedDate, locale)}" -->
+        <span class="text-secondary ps-2"></span>
+    </li>
+</ul>
