@@ -8,6 +8,12 @@ namespace SsrTodo.Domain
     {
         private TodoList todoList = new TodoList();
 
+        public TodoListService()
+        {
+            AddTask("Einkaufen", null);
+            AddTask("C# lernen", new DateTime(2021, 12, 31));
+        }
+
         public ICollection<Task> GetTasks()
         {
             return todoList.GetTasks();

@@ -5,4 +5,8 @@
     <RootNamespace>SsrTodo</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Humanizer" Version="2.11.10" />
+  </ItemGroup>
+
 </Project>

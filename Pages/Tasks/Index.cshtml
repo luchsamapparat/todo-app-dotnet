@@ -1,0 +1,54 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Tasks";
+}
+
+@if (!Model.Tasks.Any())
+{
+    <p class="empty-task-list alert alert-success mb-5" role="alert">All done!</p>
+}
+
+@if (Model.Tasks.Any())
+{
+    <form asp-page="/Tasks/Completed" class="task-list mb-5">
+        <ul class="list-unstyled">
+            @foreach (var task in Model.Tasks)
+            {
+                <li class="form-check">
+                    <input type="checkbox" id="completedTasks-@task.Id" name="completedTasks" value="@task.Id" class="form-check-input completed-task" />
+                    <label for="completedTasks-@task.Id" class="form-check-label">
+                        <span>@task.Description</span>
+                        @if (task.DueDate != null)
+                        {
+                            <span class="text-secondary ps-2">@task.DueDate?.ToShortDateString()</span>
+                        }
+                    </label>
+                </li>
+            }
+        </ul>
+
+        <button class="mark-as-completed btn btn-primary">Mark as Completed</button>
+    </form>
+}
+
+<form asp-page="/Tasks/Index" class="add-task-form row needs-validation was-validated">
+    <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-3">
+        <label for="addTask-description" class="form-label">New Task</label>
+        <input type="text" asp-for="AddTaskForm.Description" required minlength="1" class="form-control description" placeholder="Add a Task..." />
+        <span asp-validation-for="AddTaskForm.Description" class="invalid-feedback"></span>
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 mb-3">
+        <label for="addTask-dueDate" class="form-label">Due Date</label>
+        <input type="date" asp-for="AddTaskForm.DueDate" min="@DateTimeUtils.FormatIsoDate(DateTime.Now)}" class="form-control due-date" />
+        <span asp-validation-for="AddTaskForm.DueDate" class="invalid-feedback"></span>
+    </div>
+
+    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-start">
+        <button class="add-task btn btn-primary flex-fill" style="margin-top: 32px">
+            Add
+            <span class="d-sm-none">Task</span>
+        </button>
+    </div>
+</form>
