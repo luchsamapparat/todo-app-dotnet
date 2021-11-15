@@ -1,46 +1,43 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using SsrTodo.Domain;
 
-namespace SsrTodo.Pages.Tasks
+namespace SsrTodo.Pages.Tasks;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly TodoListService _todoListService;
+    private readonly ILogger<IndexModel> _logger;
+
+    public IndexModel(
+        TodoListService todoListService,
+        ILogger<IndexModel> logger
+    )
     {
-        private readonly TodoListService _todoListService;
-        private readonly ILogger<IndexModel> _logger;
+        _todoListService = todoListService;
+        _logger = logger;
+    }
 
-        public IndexModel(
-            TodoListService todoListService,
-            ILogger<IndexModel> logger
-        )
-        {
-            _todoListService = todoListService;
-            _logger = logger;
-        }
+    public ICollection<Domain.Task> Tasks = Array.Empty<Domain.Task>();
 
-        public ICollection<Task> Tasks;
+    public AddTaskForm AddTaskForm = new AddTaskForm();
 
-        public AddTaskForm AddTaskForm;
+    public void OnGet()
+    {
+        Tasks = _todoListService.GetTasks();
+    }
 
-        public void OnGet()
+    public IActionResult OnPost(AddTaskForm addTaskForm)
+    {
+        if (!ModelState.IsValid)
         {
             Tasks = _todoListService.GetTasks();
+            AddTaskForm = addTaskForm;
+            return Page();
         }
 
-        public IActionResult OnPost(AddTaskForm addTaskForm)
-        {
-            if (!ModelState.IsValid)
-            {
-                Tasks = _todoListService.GetTasks();
-                AddTaskForm = addTaskForm;
-                return Page();
-            }
-
-            _todoListService.AddTask(addTaskForm.Description, addTaskForm.DueDate);
-            return Redirect("/");
-        }
-
+        _todoListService.AddTask(addTaskForm.Description, addTaskForm.DueDate);
+        return Redirect("/");
     }
+
 }

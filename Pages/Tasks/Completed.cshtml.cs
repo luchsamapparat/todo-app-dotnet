@@ -1,36 +1,33 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using SsrTodo.Domain;
 
-namespace SsrTodo.Pages.Tasks
+namespace SsrTodo.Pages.Tasks;
+
+public class CompletedTasksModel : PageModel
 {
-    public class CompletedTasksModel : PageModel
+    private readonly TodoListService _todoListService;
+    private readonly ILogger<CompletedTasksModel> _logger;
+
+    public CompletedTasksModel(
+        TodoListService todoListService,
+        ILogger<CompletedTasksModel> logger
+    )
     {
-        private readonly TodoListService _todoListService;
-        private readonly ILogger<CompletedTasksModel> _logger;
+        _todoListService = todoListService;
+        _logger = logger;
+    }
 
-        public CompletedTasksModel(
-            TodoListService todoListService,
-            ILogger<CompletedTasksModel> logger
-        )
-        {
-            _todoListService = todoListService;
-            _logger = logger;
-        }
+    public ICollection<Domain.Task> CompletedTasks = Array.Empty<Domain.Task>();
 
-        public ICollection<Task> CompletedTasks;
+    public void OnGet()
+    {
+        CompletedTasks = _todoListService.GetCompletedTasks();
+    }
 
-        public void OnGet()
-        {
-            CompletedTasks = _todoListService.GetCompletedTasks();
-        }
-
-        public IActionResult OnPost(IEnumerable<string> completedTasks)
-        {
-            _todoListService.CompleteTasks(completedTasks);
-            return Redirect("/");
-        }
+    public IActionResult OnPost(IEnumerable<string> completedTasks)
+    {
+        _todoListService.CompleteTasks(completedTasks);
+        return Redirect("/");
     }
 }
