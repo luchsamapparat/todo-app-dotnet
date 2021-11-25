@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using SsrTodo.Domain;
 
-namespace SsrTodo.Pages.Tasks;
+namespace SsrTodo.Domain;
 
 public class AddTaskForm
 {
