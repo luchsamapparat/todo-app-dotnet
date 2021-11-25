@@ -2,6 +2,7 @@
 @model CompletedTasksModel
 @{
     ViewData["Title"] = "Completed Tasks";
+    ViewData["CurrentPage"] = "completedTasks";
 }
 
 @if (!Model.CompletedTasks.Any())

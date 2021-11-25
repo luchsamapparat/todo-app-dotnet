@@ -22,12 +22,10 @@
             <a class="navbar-brand" href="/">📝 To-Do App</a>
             <ul class="navbar-nav collapse navbar-collapse">
                 <li class="nav-item">
-                    <!-- TODO: th:classappend="${currentPage == 'tasks' ? 'active' : null}" th:attrappend="aria-current=${currentPage == 'tasks' ? 'page' : null}" -->
-                    <a class="nav-link" href="/">Tasks</a>
+                    <a class="nav-link@("tasks".Equals(ViewData["CurrentPage"]) ? " active" : string.Empty)" aria-current="@("tasks".Equals(ViewData["CurrentPage"]) ? "page" : string.Empty)" href="/">Tasks</a>
                 </li>
                 <li class="nav-item">
-                    <!-- TODO: th:classappend="${currentPage == 'completedTasks' ? 'active' : null}" th:attrappend="aria-current=${currentPage == 'completedTasks' ? 'page' : null}" -->
-                    <a class="nav-link" href="/tasks/completed">Completed Tasks</a>
+                    <a class="nav-link@("completedTasks".Equals(ViewData["CurrentPage"]) ? " active" : string.Empty)" aria-current="@("completedTasks".Equals(ViewData["CurrentPage"]) ? "page" : string.Empty)" href="/tasks/completed">Completed Tasks</a>
                 </li>
             </ul>
         </div>
