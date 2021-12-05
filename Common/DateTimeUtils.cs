@@ -1,6 +1,6 @@
 using Humanizer;
 
-namespace SsrTodo.Domain;
+namespace SsrTodo.Common;
 
 public class DateTimeUtils
 {

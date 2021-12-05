@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using SsrTodo.Domain;
+using SsrTodo.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,7 @@ builder.Services
     });
 
 builder.Services.AddSingleton<TodoListService>();
-builder.Services.AddSingleton<IHtmlGenerator, SsrTodo.Domain.HtmlGenerator>();
+builder.Services.AddSingleton<IHtmlGenerator, HtmlGenerator>();
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
