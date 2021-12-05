@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Options;
 
-namespace SsrTodo.Web;
+namespace SsrTodo.Pages;
 
 public class HtmlGenerator : DefaultHtmlGenerator
 {
